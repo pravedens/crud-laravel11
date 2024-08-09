@@ -73,6 +73,7 @@
               </thead>
 
               <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
+                @forelse ($users as $row )
                 <tr>
                   <td class="size-px whitespace-nowrap">
                     <div class="py-3 ps-6">
@@ -84,21 +85,19 @@
                       <div class="flex items-center gap-x-3">
                         <img class="inline-block size-[38px] rounded-full" src="https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Avatar">
                         <div class="grow">
-                          <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">Christina Bersh</span>
-                          <span class="block text-sm text-gray-500 dark:text-neutral-500">christina@site.com</span>
+                          <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $row->name }}</span>
                         </div>
                       </div>
                     </div>
                   </td>
                   <td class="h-px w-72 whitespace-nowrap">
                     <div class="px-6 py-3">
-                      <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">Director</span>
-                      <span class="block text-sm text-gray-500 dark:text-neutral-500">Human resources</span>
+                      <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $row->email }}</span>
                     </div>
                   </td>
                   <td class="h-px w-72 whitespace-nowrap">
                     <div class="px-6 py-3">
-                      <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">Address</span>
+                      <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $row->address ?? '-' }}</span>
                     </div>
                   </td>
                   <td class="size-px whitespace-nowrap">
@@ -109,6 +108,9 @@
                     </div>
                   </td>
                 </tr>
+                @empty
+                  <h1 class="mt-4 text-2xl text-center dark:text-gray-300">No Data</h1>
+                @endforelse
 
               </tbody>
             </table>
