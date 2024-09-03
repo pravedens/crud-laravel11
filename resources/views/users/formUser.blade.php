@@ -79,7 +79,11 @@
                             <input name="name" id="af-account-full-name" type="text"
                                 class="relative block w-full px-3 py-2 -mt-px text-sm border-gray-200 shadow-sm pe-11 -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                 placeholder="Maria">
+                            @error('name')
+                                <span class="text-sm text-red-400">{{ $message }}</span>
+                            @enderror
                         </div>
+
                         <!-- End Col -->
 
                         <div class="sm:col-span-3">
@@ -94,6 +98,9 @@
                             <input name="email" id="af-account-email" type="email"
                                 class="block w-full px-3 py-2 text-sm border-gray-200 rounded-lg shadow-sm pe-11 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                 placeholder="maria@site.com">
+                            @error('email')
+                                <span class="text-sm text-red-400">{{ $message }}</span>
+                            @enderror
                         </div>
                         <!-- End Col -->
 
@@ -111,6 +118,9 @@
                                     class="block w-full px-3 py-2 text-sm border-gray-200 rounded-lg shadow-sm pe-11 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                     placeholder="Enter new password">
                             </div>
+                            @error('password')
+                                <span class="text-sm text-red-400">{{ $message }}</span>
+                            @enderror
                         </div>
                         <!-- End Col -->
 
