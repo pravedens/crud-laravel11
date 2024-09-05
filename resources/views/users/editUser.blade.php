@@ -14,11 +14,12 @@
                         Profile
                     </h2>
                     <p class="text-sm text-gray-600 dark:text-neutral-400">
-                        Manage your name, password and account settings.
+                        Edit your name, password and account settings.
                     </p>
                 </div>
 
-                <form action="{{ route('users.store') }}" method="post">
+                <form action="{{ route('users.update', $user->id) }}" method="post">
+                    @method('PUT')
                     @csrf
                     <!-- Grid -->
                     <div class="grid gap-2 sm:grid-cols-12 sm:gap-6">
@@ -78,7 +79,7 @@
                         <div class="sm:col-span-9">
                             <input name="name" id="af-account-full-name" type="text"
                                 class="relative block w-full px-3 py-2 -mt-px text-sm border-gray-200 shadow-sm pe-11 -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                placeholder="Maria">
+                                value="{{ $user->name }}">
                             @error('name')
                                 <span class="text-sm text-red-400">{{ $message }}</span>
                             @enderror
@@ -97,7 +98,7 @@
                         <div class="sm:col-span-9">
                             <input name="email" id="af-account-email" type="email"
                                 class="block w-full px-3 py-2 text-sm border-gray-200 rounded-lg shadow-sm pe-11 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                placeholder="maria@site.com">
+                                value="{{ $user->email }}">
                             @error('email')
                                 <span class="text-sm text-red-400">{{ $message }}</span>
                             @enderror
@@ -117,6 +118,7 @@
                                 <input name="password" id="af-account-password" type="password"
                                     class="block w-full px-3 py-2 text-sm border-gray-200 rounded-lg shadow-sm pe-11 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                     placeholder="Enter new password">
+                                    <span class="text-sm dark:text-red-500">Оставьте поле пустым, если не хотите менять пароль.</span>
                             </div>
                             @error('password')
                                 <span class="text-sm text-red-400">{{ $message }}</span>
@@ -135,7 +137,7 @@
                         <div class="sm:col-span-9">
                             <textarea name="address" id="af-account-bio"
                                 class="block w-full px-3 py-2 text-sm border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                rows="6" placeholder="Type your address..."></textarea>
+                                rows="6" placeholder="Type your address...">{{ $user->address }}</textarea>
                         </div>
                         <!-- End Col -->
                     </div>

@@ -102,7 +102,7 @@
                   </td>
                   <td class="size-px whitespace-nowrap">
                     <div class="px-6 py-1.5">
-                      <a class="inline-flex items-center text-sm font-medium text-blue-600 gap-x-1 decoration-2 hover:underline focus:outline-none focus:underline dark:text-blue-500" href="#">
+                      <a href="{{ route('users.edit', $row->id) }}" class="inline-flex items-center text-sm font-medium text-blue-600 gap-x-1 decoration-2 hover:underline focus:outline-none focus:underline dark:text-blue-500" href="#">
                         Edit
                       </a>
                     </div>

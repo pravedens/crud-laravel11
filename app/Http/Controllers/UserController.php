@@ -61,7 +61,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $title = "Edit User";
+        return view('users.editUser', compact('user', 'title'));
     }
 
     /**
@@ -69,7 +70,20 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'name' => 'required|min:3',
+            'email' => 'required',
+        ]);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if($request->password != "") {
+            $user->password = Hash::make($request->password);
+        }
+        $user->address = $request->address;
+
+        $user->update();
+        return redirect()->route('users.index');
     }
 
     /**
