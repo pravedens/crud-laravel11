@@ -46,7 +46,7 @@ class UserController extends Controller
             'address' => $request->address
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'User created!');
     }
 
     /**
@@ -84,7 +84,7 @@ class UserController extends Controller
         $user->address = $request->address;
 
         $user->update();
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('success', 'User updated!');
     }
 
     /**
@@ -95,7 +95,7 @@ class UserController extends Controller
         try {
             $user->deleteOrFail();
 
-            return redirect()->back();
+            return redirect()->back()->with('success', 'User deleted!');
         } catch (Exception $e) {
             return $e->getMessage();
         }
