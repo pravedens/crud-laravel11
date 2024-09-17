@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -91,6 +92,13 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        try {
+            $user->deleteOrFail();
+
+            return redirect()->back();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+
     }
 }
