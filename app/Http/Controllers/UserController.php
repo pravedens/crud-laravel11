@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -39,11 +40,19 @@ class UserController extends Controller
             'password' => 'required|min:6'
         ]);
 
+        $imageName = null;
+
+        if($request->photo){
+            $imageName = time().'.'.$request->file('photo')->extension();
+            $request->photo->storeAs('public/images', $imageName);
+        }
+
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'address' => $request->address
+            'address' => $request->address,
+            'photo_profile' => $imageName
         ]);
 
         return redirect()->back()->with('success', 'User created!');
@@ -75,6 +84,18 @@ class UserController extends Controller
             'name' => 'required|min:3',
             'email' => 'required',
         ]);
+
+        if($request->photo){
+            $imageName = time().'.'.$request->file('photo')->extension();
+            $request->photo->storeAs('public/images', $imageName);
+
+            //delete old photo
+            $path = storage_path('app/public/images/'.$user->photo_profile);
+            if(File::exists($path)) {
+                File::delete($path);
+            }
+            $user->photo_profile = $imageName;
+        }
 
         $user->name = $request->name;
         $user->email = $request->email;
