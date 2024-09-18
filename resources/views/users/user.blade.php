@@ -28,7 +28,13 @@
 
                                 <div>
                                     <div class="inline-flex gap-x-2">
-
+                                        <form method="GET" action="{{ route('users.index') }}">
+                                            <div class="max-w-sm space-y-3">
+                                                <input value="{{ request('search') }}" name="search" type="text"
+                                                    class="block w-full px-5 py-3 text-sm border-gray-200 rounded-full focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                    placeholder="Input text">
+                                            </div>
+                                        </form>
 
                                         <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg gap-x-2 hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
                                             href={{ route('users.create') }}>
@@ -91,14 +97,14 @@
                                             <td class="size-px whitespace-nowrap">
                                                 <div class="py-3 ps-6">
                                                     <span
-                                                        class="text-xs font-semibold tracking-wide text-gray-800 uppercase dark:text-neutral-200">{{ $index+$users->firstItem() }}</span>
+                                                        class="text-xs font-semibold tracking-wide text-gray-800 uppercase dark:text-neutral-200">{{ $index + $users->firstItem() }}</span>
                                                 </div>
                                             </td>
                                             <td class="size-px whitespace-nowrap">
                                                 <div class="py-3 ps-6 lg:ps-3 xl:ps-0 pe-6">
                                                     <div class="flex items-center gap-x-3">
                                                         <img class="inline-block size-[38px] rounded-full"
-                                                            src="{{ asset('storage/images/'.$row->photo_profile) }}"
+                                                            src="{{ asset('storage/images/' . $row->photo_profile) }}"
                                                             alt="Avatar">
                                                         <div class="grow">
                                                             <span
@@ -126,10 +132,12 @@
                                                         href="#">
                                                         Edit
                                                     </a>
-                                                    <form onsubmit="return confirm('Вы уверенны?')" method="post" action="{{ route('users.destroy', $row->id) }}">
+                                                    <form onsubmit="return confirm('Вы уверенны?')" method="post"
+                                                        action="{{ route('users.destroy', $row->id) }}">
                                                         @method('DELETE')
                                                         @csrf
-                                                        <button type="submit" class="inline-flex items-center text-sm font-medium text-red-600 gap-x-1 decoration-2 hover:underline focus:outline-none focus:underline dark:text-red-500"
+                                                        <button type="submit"
+                                                            class="inline-flex items-center text-sm font-medium text-red-600 gap-x-1 decoration-2 hover:underline focus:outline-none focus:underline dark:text-red-500"
                                                             href="#">
                                                             Delete
                                                         </button>
@@ -146,11 +154,12 @@
                             <!-- End Table -->
 
                             <!-- Footer -->
-                            <div class="grid gap-3 px-6 py-4 border-t border-gray-200 md:flex md:justify-between md:items-center dark:border-neutral-700">
+                            <div
+                                class="grid gap-3 px-6 py-4 border-t border-gray-200 md:flex md:justify-between md:items-center dark:border-neutral-700">
 
                                 {{ $users->links('pagination::tailwind') }}
 
-                               <!--<div>
+                                <!--<div>
                                     <p class="text-sm text-gray-600 dark:text-neutral-400">
                                         <span class="font-semibold text-gray-800 dark:text-neutral-200">12</span>
                                         results
