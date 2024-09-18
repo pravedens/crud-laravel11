@@ -86,12 +86,12 @@
                                 </thead>
 
                                 <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                                    @forelse ($users as $row)
+                                    @forelse ($users as $index => $row)
                                         <tr>
                                             <td class="size-px whitespace-nowrap">
                                                 <div class="py-3 ps-6">
                                                     <span
-                                                        class="text-xs font-semibold tracking-wide text-gray-800 uppercase dark:text-neutral-200">{{ $row->id }}</span>
+                                                        class="text-xs font-semibold tracking-wide text-gray-800 uppercase dark:text-neutral-200">{{ $index+$users->firstItem() }}</span>
                                                 </div>
                                             </td>
                                             <td class="size-px whitespace-nowrap">
@@ -146,9 +146,11 @@
                             <!-- End Table -->
 
                             <!-- Footer -->
-                            <div
-                                class="grid gap-3 px-6 py-4 border-t border-gray-200 md:flex md:justify-between md:items-center dark:border-neutral-700">
-                                <div>
+                            <div class="grid gap-3 px-6 py-4 border-t border-gray-200 md:flex md:justify-between md:items-center dark:border-neutral-700">
+
+                                {{ $users->links('pagination::tailwind') }}
+
+                               <!--<div>
                                     <p class="text-sm text-gray-600 dark:text-neutral-400">
                                         <span class="font-semibold text-gray-800 dark:text-neutral-200">12</span>
                                         results
@@ -179,7 +181,7 @@
                                             </svg>
                                         </button>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                             <!-- End Footer -->
                         </div>
