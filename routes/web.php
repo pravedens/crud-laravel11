@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FoodController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -17,8 +19,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+
+
+});
+
+Route::middleware(['auth', 'admin'])->group(function(){
     //Page User
     Route::resource('users', UserController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('foods', FoodController::class);
 });
 
 Route::get('/home', function () {
