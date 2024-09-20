@@ -10,4 +10,5 @@ class Category extends Model
     use HasFactory;
 
     protected $quarded = [];
+    protected $fillable = ['name','slug','icon'];
 }
