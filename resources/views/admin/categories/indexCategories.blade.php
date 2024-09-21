@@ -118,13 +118,13 @@
                                             </td>
                                             <td class="size-px whitespace-nowrap">
                                                 <div class="px-6 py-1.5 flex gap-2">
-                                                    <a href="{{ route('categories.edit', $row->id) }}"
+                                                    <a href="{{ route('categories.edit', $row->slug) }}"
                                                         class="inline-flex items-center text-sm font-medium text-blue-600 gap-x-1 decoration-2 hover:underline focus:outline-none focus:underline dark:text-blue-500"
                                                         href="#">
                                                         Edit
                                                     </a>
                                                     <form onsubmit="return confirm('Вы уверенны?')" method="post"
-                                                        action="{{ route('categories.destroy', $row->id) }}">
+                                                        action="{{ route('categories.destroy', $row->slug) }}">
                                                         @method('DELETE')
                                                         @csrf
                                                         <button type="submit"

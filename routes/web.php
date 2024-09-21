@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'admin'])->group(function(){
     //Page User
     Route::resource('users', UserController::class);
-    Route::resource('categories', CategoryController::class);
+    Route::resource('categories', CategoryController::class)->parameters(['categories' => 'category:slug']);
     Route::resource('foods', FoodController::class);
 });
 

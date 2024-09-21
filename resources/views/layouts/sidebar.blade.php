@@ -92,7 +92,7 @@
                     </li>
 
                     <li>
-                        <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index', 'categories.show', 'categories.create')">
+                        <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index', 'categories.show', 'categories.create', 'categories.edit')">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24"
                             height="24" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="flex-shrink-0 size-4">

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
@@ -65,7 +67,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        $title = 'Edit Category '.$category->name;
+        return view('admin.categories.editCategories', compact('title', 'category'));
     }
 
     /**
@@ -73,7 +76,31 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'name' => 'required|min:3',
+        ]);
+
+        $imageIcon = null;
+
+        if($request->icon){
+            $imageIcon = time().'.'.$request->file('icon')->extension();
+            $request->icon->storeAs('public/categories', $imageIcon);
+
+            //delete old photo
+            $path = storage_path('app/public/categories/'.$category->icon);
+            if(File::exists($path)) {
+                File::delete($path);
+            }
+
+            $category->icon = $imageIcon;
+        }
+
+        $category->name = $request->name;
+        $category->slug = Str::slug($request->name);
+
+        $category->update();
+
+        return redirect()->back()->with('success', 'Category updated!');
     }
 
     /**
@@ -81,6 +108,12 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        try {
+            $category->deleteOrFail();
+
+            return redirect()->back()->with('success', 'Category deleted!');
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
 }
