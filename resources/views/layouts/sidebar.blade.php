@@ -102,7 +102,7 @@
                             </svg>
                             Categories
                         </x-nav-link>
-                        <x-nav-link :href="route('foods.index')" :active="request()->routeIs('foods.index', 'foods.show', 'foods.create')">
+                        <x-nav-link :href="route('foods.index')" :active="request()->routeIs('foods.index', 'foods.show', 'foods.create', 'foods.edit')">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24"
                             height="24" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="flex-shrink-0 size-4">

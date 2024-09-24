@@ -11,11 +11,12 @@
             <div class="p-4 bg-white shadow rounded-xl sm:p-7 dark:bg-neutral-800">
                 <div class="mb-8">
                     <h2 class="text-xl font-bold text-gray-800 dark:text-neutral-200">
-                        Food
+                        Edit Food
                     </h2>
                 </div>
 
-                <form action="{{ route('foods.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('foods.update', $food->id) }}" method="post" enctype="multipart/form-data">
+                    @method('PUT')
                     @csrf
                     <!-- Grid -->
                     <div class="grid gap-2 sm:grid-cols-12 sm:gap-6">
@@ -34,7 +35,8 @@
                                 placeholder="Name Food">
                                 <option selected="">Select Category</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option @if ($category->id == $food->category_id) selected='selected' @endif
+                                        value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -50,7 +52,7 @@
                         <div class="sm:col-span-9">
                             <input name="name" id="af-account-full-name" type="text"
                                 class="relative block w-full px-3 py-2 -mt-px text-sm border-gray-200 shadow-sm pe-11 -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                placeholder="Name Food">
+                                placeholder="Name Food" value="{{ $food->name }}">
                             @error('name')
                                 <span class="text-sm text-red-400">{{ $message }}</span>
                             @enderror
@@ -69,7 +71,7 @@
                         <div class="sm:col-span-9">
                             <input name="price" id="currency" type="text"
                                 class="relative block w-full px-3 py-2 -mt-px text-sm border-gray-200 shadow-sm pe-11 -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                placeholder="Price">
+                                placeholder="Price" value="{{ $food->price }}">
                         </div>
                         <!-- End Col -->
 
@@ -83,14 +85,18 @@
                         <div class="sm:col-span-9">
                             <textarea
                                 class="block w-full px-4 py-3 text-sm border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                rows="3" placeholder="Description food..."></textarea>
+                                rows="3" placeholder="Description food..." >{{ $food->description }}</textarea>
                         </div>
 
-                        <div class="sm:col-span-3">
+                        <div class="flex-col sm:col-span-3">
                             <label for="af-account-email"
                                 class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                 Image
                             </label>
+                            <div>
+                                <img class="inline-block size-[108px] rounded-sm"
+                                    src="{{ asset('storage/foods/' . $food->image) }}" alt="Image Description">
+                            </div>
                         </div>
 
                         <div class="sm:col-span-9">
@@ -113,7 +119,7 @@
                         </a>
                         <button type="submit"
                             class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg gap-x-2 hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
-                            Save
+                            Update
                         </button>
                     </div>
                 </form>

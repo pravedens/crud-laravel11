@@ -14,9 +14,12 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::paginate(10);
+        $categories = Category::when($request->search, function($query) use($request){
+            $query->where('name', 'like', '%'.$request->search.'%');
+        })->paginate(20)->appends(['search' => $request->search]);
+        
         return view('admin.categories.indexCategories', compact('categories'));
     }
 
@@ -109,6 +112,11 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         try {
+            $path = storage_path('app/public/categories/'.$category->icon);
+            if(File::exists($path)) {
+                File::delete($path);
+            }
+
             $category->deleteOrFail();
 
             return redirect()->back()->with('success', 'Category deleted!');

@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Food;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class FoodController extends Controller
@@ -76,7 +78,10 @@ class FoodController extends Controller
      */
     public function edit(Food $food)
     {
-        //
+        $title = 'Edit Food '.$food->name;
+        $categories = Category::all();
+
+        return view('admin.foods.editFood', compact('title', 'food', 'categories'));
     }
 
     /**
@@ -84,14 +89,53 @@ class FoodController extends Controller
      */
     public function update(Request $request, Food $food)
     {
-        //
+        $request->validate([
+            'name' => 'required|min:3',
+        ]);
+
+        $imageFood = null;
+
+        if($request->imageFood){
+            $imageFood = time().'.'.$request->file('imageFood')->extension();
+            $request->imageFood->storeAs('public/foods', $imageFood);
+
+            //delete old photo
+            $path = storage_path('app/public/foods'.$food->image);
+            if(File::exists($path)) {
+                File::delete($path);
+            }
+
+            $food->image = $imageFood;
+        }
+
+        $food->name = $request->name;
+        $food->slug = Str::slug($request->name);
+        $food->price = $request->price;
+        $food->description = $request->description;
+
+        $food->update();
+
+        return redirect()->back()->with('success', 'Food updated!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
+
     public function destroy(Food $food)
     {
-        //
+        try {
+
+            $path = storage_path('app/public/foods/'.$food->image);
+            if(File::exists($path)) {
+                File::delete($path);
+            }
+
+            $food->deleteOrFail();
+
+            return redirect()->back()->with('success', 'Food deleted!');
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
 }

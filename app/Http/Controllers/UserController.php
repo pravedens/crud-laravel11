@@ -120,6 +120,12 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         try {
+
+            $path = storage_path('app/public/images/'.$user->photo_profile);
+            if(File::exists($path)) {
+                File::delete($path);
+            }
+
             $user->deleteOrFail();
 
             return redirect()->back()->with('success', 'User deleted!');
