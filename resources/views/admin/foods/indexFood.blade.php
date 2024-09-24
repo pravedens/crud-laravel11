@@ -136,8 +136,8 @@
                                             <td class="h-px w-72 whitespace-nowrap">
                                                 <div class="px-6 py-3">
                                                     <img class="inline-block size-[38px] rounded-full"
-                                                    src="{{ asset('storage/foods/' . $row->image) }}"
-                                                    alt="Avatar">
+                                                    src="{{ asset('storage/foods/'.$row->image) }}"
+                                                    alt="Image Description">
                                                 </div>
                                             </td>
                                             <td class="size-px whitespace-nowrap">

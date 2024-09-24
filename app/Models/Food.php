@@ -12,4 +12,6 @@ class Food extends Model
     protected $quarded = [];
 
     protected $table = 'foods';
+
+    protected $fillable = ['name','slug','image', 'price', 'description','category_id', 'user_id'];
 }

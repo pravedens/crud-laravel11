@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('price');
             $table->text('description')->nullable();
             $table->string('image')->nullable();
+            
+            $table->foreignId('category_id')->constrained('categories')->after('image');
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
