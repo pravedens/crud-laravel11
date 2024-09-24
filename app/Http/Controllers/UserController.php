@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -19,7 +20,7 @@ class UserController extends Controller
         $users = User::when($request->search, function($query) use($request){
             $query->where('name', 'like', '%'.$request->search.'%')
                 ->orWhere('email', 'like', '%'.$request->search.'%');
-        })->paginate(4)->appends(['search' => $request->search]);
+        })->paginate(20)->appends(['search' => $request->search]);
         return view('users.user', compact('users'));
     }
 
@@ -28,7 +29,9 @@ class UserController extends Controller
      */
     public function create()
     {
+
         $title = 'Create User';
+
         return view('users.formUser', compact('title'));
     }
 
