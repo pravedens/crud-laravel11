@@ -83,6 +83,15 @@
                                             <div class="flex items-center gap-x-2">
                                                 <span
                                                     class="text-xs font-semibold tracking-wide text-gray-800 uppercase dark:text-neutral-200">
+                                                    Category
+                                                </span>
+                                            </div>
+                                        </th>
+
+                                        <th scope="col" class="px-6 py-3 text-start">
+                                            <div class="flex items-center gap-x-2">
+                                                <span
+                                                    class="text-xs font-semibold tracking-wide text-gray-800 uppercase dark:text-neutral-200">
                                                     Price
                                                 </span>
                                             </div>
@@ -125,6 +134,12 @@
                                                 <div class="px-6 py-3">
                                                     <span
                                                         class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $row->slug }}</span>
+                                                </div>
+                                            </td>
+                                            <td class="h-px w-72 whitespace-nowrap">
+                                                <div class="px-6 py-3">
+                                                    <span
+                                                        class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $row->category->name }}</span>
                                                 </div>
                                             </td>
                                             <td class="h-px w-72 whitespace-nowrap">
