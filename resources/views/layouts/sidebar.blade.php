@@ -91,6 +91,9 @@
                         </x-nav-link>
                     </li>
 
+                    <li class='text-gray-400 text-[14px] ml-2'>Menu</li>
+                    <hr class='w-1/2 mt-1 ml-2 text-gray-100 opacity-30'>
+
                     <li>
                         <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index', 'categories.show', 'categories.create', 'categories.edit')">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -111,6 +114,10 @@
                             </svg>
                             Foods
                         </x-nav-link>
+
+                        <li class='text-gray-400 text-[14px] ml-2'>Setting</li>
+                        <hr class='w-1/2 mt-1 ml-2 text-gray-100 opacity-30'>
+
                         <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index', 'users.show', 'users.create')">
                             <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
