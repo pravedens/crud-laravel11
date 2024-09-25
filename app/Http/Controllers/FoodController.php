@@ -55,7 +55,7 @@ class FoodController extends Controller
         Food::create([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
-            'price' => $request->price,
+            'price' => str_replace('.', '', $request->price),
             'description' => $request->description,
             'image' => $imageFood,
             'category_id' => $request->category,
@@ -110,7 +110,7 @@ class FoodController extends Controller
 
         $food->name = $request->name;
         $food->slug = Str::slug($request->name);
-        $food->price = $request->price;
+        $food->price = str_replace('.', '', $request->price);
         $food->description = $request->description;
 
         $food->update();
