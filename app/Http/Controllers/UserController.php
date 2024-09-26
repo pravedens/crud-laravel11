@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserRequest;
 use App\Models\Category;
 use Exception;
 use Illuminate\Http\Request;
@@ -38,13 +39,9 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        $request->validate([
-            'name' => 'required|min:3',
-            'email' => 'required|unique:users',
-            'password' => 'required|min:6'
-        ]);
+        $request->validate();
 
         $imageName = null;
 
