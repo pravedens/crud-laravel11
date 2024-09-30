@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -31,13 +32,14 @@ class AuthApiController extends Controller
             $data = [
                 'access_token' => $tokenResult,
                 'token_type' => 'Bearer',
-                'user' => $user
+                'user' => new UserResource($user)
             ];
 
-            return response()->json(['status' => true, 'data' => $data, 'message' => 'Create Token Success']);
+            return $this->sendResponse($data, 'Create Token Success');
 
         } catch (Exception $error) {
-            return response()->json(['status' => false, 'data' => null, 'message' => 'Create Token Failed, message: '.$error->getMessage()]);
+
+            return $this->sendError('Create Token Failed', $error->getMessage());
         }
     }
 
@@ -51,7 +53,7 @@ class AuthApiController extends Controller
 
             $credentials = request(['email', 'password']);
             if (!Auth::attempt($credentials)) {
-                return response()->json(['status' => false, 'data' => null, 'message' => 'Authentication Failed']);
+                return $this->sendError('Unauthorized', 'Authentication Failed', 500);
             }
 
             $user = User::where('email', $request->email)->first();
@@ -64,13 +66,16 @@ class AuthApiController extends Controller
             $data = [
                 'access_token' => $tokenResult,
                 'token_type' => 'Bearer',
-                'user' => $user
+                'user' => new UserResource($user)
             ];
 
-            return response()->json(['status' => true, 'data' => $data, 'message' => 'Authentication']);
+            return $this->sendResponse($data, 'Authentication');
 
         } catch (Exception $error) {
-            return response()->json(['status' => false, 'data' => null, 'message' => 'Authentication Failed']);
+            return $this->sendError(
+                'Login Failed',
+                $error->getMessage()
+            );
         }
     }
 
@@ -79,6 +84,7 @@ class AuthApiController extends Controller
         $user = User::find(Auth::user()->id);
 
         $user->tokens()->delete();
+        
         return response()->noContent();
     }
 }

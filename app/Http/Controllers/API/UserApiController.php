@@ -20,7 +20,7 @@ class UserApiController extends Controller
     {
         $users = User::all();
 
-        return response()->json(['status' => true, 'data' => UserResource::collection($users), 'message' => 'Get Data Success']);
+        return $this->sendResponse(UserResource::collection($users), 'Get Data Success');
     }
 
     /**
@@ -45,7 +45,7 @@ class UserApiController extends Controller
             'photo_profile' => $imageName
         ]);
 
-        return response()->json(['status' => true, 'data' => new UserResource($user), 'message' => 'Save Data Success']);
+        return $this->sendResponse(new UserResource($user), 'Save Data Success');
     }
 
     /**
@@ -53,7 +53,7 @@ class UserApiController extends Controller
      */
     public function show(User $user)
     {
-        return response()->json(['status' => true, 'data' => new UserResource($user), 'message' => 'Show User Success']);
+        return $this->sendResponse(new UserResource($user), 'Show User Success');
     }
 
     /**
@@ -84,7 +84,7 @@ class UserApiController extends Controller
 
         $user->update();
 
-        return response()->json(['status' => true, 'data' => new UserResource($user), 'message' => 'Update Data Success']);
+        return $this->sendResponse(new UserResource($user), 'Update Data Success');
     }
 
     /**
@@ -103,7 +103,7 @@ class UserApiController extends Controller
 
             return response()->noContent();
         } catch (Exception $e) {
-            return $e->getMessage();
+            return $this->sendError('Error delete', $e->getMessage());
         }
     }
 }
