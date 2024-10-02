@@ -79,8 +79,7 @@
                 <ul class="flex flex-col space-y-1">
                     <li>
                         <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')"
-                            class="flex items-center gap-x-3.5 py-2 px-2.5 bg-white/10 text-sm text-white rounded-lg hover:bg-white/10 focus:outline-none focus:bg-white/10 dark:bg-neutral-700 dark:text-white"
-                            href="#">
+                            class="flex items-center gap-x-3.5 py-2 px-2.5 bg-white/10 text-sm text-white rounded-lg hover:bg-white/10 focus:outline-none focus:bg-white/10 dark:bg-neutral-700 dark:text-white">
                             <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round">
@@ -95,10 +94,15 @@
                     <hr class='w-1/2 mt-1 ml-2 text-gray-100 opacity-30'>
 
                     <li>
-                        <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index', 'categories.show', 'categories.create', 'categories.edit')">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                            height="24" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="flex-shrink-0 size-4">
+                        <x-nav-link :href="route('categories.index')" :active="request()->routeIs(
+                            'categories.index',
+                            'categories.show',
+                            'categories.create',
+                            'categories.edit',
+                        )">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                class="flex-shrink-0 size-4">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z" />
@@ -106,31 +110,32 @@
                             Categories
                         </x-nav-link>
                         <x-nav-link :href="route('foods.index')" :active="request()->routeIs('foods.index', 'foods.show', 'foods.create', 'foods.edit')">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                            height="24" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="flex-shrink-0 size-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                class="flex-shrink-0 size-4">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
                             </svg>
                             Foods
                         </x-nav-link>
 
-                        <li class='text-gray-400 text-[14px] ml-2'>Setting</li>
-                        <hr class='w-1/2 mt-1 ml-2 text-gray-100 opacity-30'>
+                    <li class='text-gray-400 text-[14px] ml-2'>Setting</li>
+                    <hr class='w-1/2 mt-1 ml-2 text-gray-100 opacity-30'>
 
-                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index', 'users.show', 'users.create')">
-                            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 size-4">
-                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                <circle cx="9" cy="7" r="4" />
-                                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                            </svg>
-                            User
-                        </x-nav-link>
+                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index', 'users.show', 'users.create')">
+                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="flex-shrink-0 size-4">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                        User
+                    </x-nav-link>
 
-                        {{-- <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white rounded-lg hover:bg-white/10 dark:hover:bg-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300" href="#">
+                    {{-- <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white rounded-lg hover:bg-white/10 dark:hover:bg-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300" href="#">
               </a>  --}}
                     </li>
                     <form method="POST" action="{{ route('logout') }}">
@@ -139,9 +144,9 @@
                         <x-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                     this.closest('form').submit();">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                            height="24" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="flex-shrink-0 size-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                class="flex-shrink-0 size-4">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
                             </svg>

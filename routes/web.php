@@ -30,7 +30,7 @@ Route::middleware(['auth', 'admin'])->group(function(){
     Route::resource('foods', FoodController::class);
 });
 
-Route::get('/home', function () {
+Route::get('admin.dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth', 'verified', 'admin'])->name('admin.dashboard');
 
