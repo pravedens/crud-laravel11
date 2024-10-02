@@ -119,6 +119,27 @@
                             Foods
                         </x-nav-link>
 
+                    <li class='text-gray-400 text-[14px] ml-2'>Authorization</li>
+                    <hr class='w-1/2 mt-1 ml-2 text-gray-100 opacity-30'>
+
+                    <x-nav-link :href="route('roles.index')" :active="request()->routeIs('roles.index', 'roles.show', 'roles.create')">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="flex-shrink-0 size-4">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z" />
+                        </svg>
+                        Roles
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('permissions.index')" :active="request()->routeIs('permissions.index', 'permissions.show', 'permissions.create')">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="flex-shrink-0 size-4">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z" />
+                        </svg>
+                        Permissions
+                    </x-nav-link>
+
                     <li class='text-gray-400 text-[14px] ml-2'>Setting</li>
                     <hr class='w-1/2 mt-1 ml-2 text-gray-100 opacity-30'>
 
@@ -135,8 +156,6 @@
                         User
                     </x-nav-link>
 
-                    {{-- <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white rounded-lg hover:bg-white/10 dark:hover:bg-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300" href="#">
-              </a>  --}}
                     </li>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
