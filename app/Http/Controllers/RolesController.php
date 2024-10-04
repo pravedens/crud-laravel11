@@ -27,4 +27,13 @@ class RolesController extends Controller
 
         return redirect()->route('roles.index')->with('success', 'Roles Saved!');
     }
+
+    public function destroy(String $id)
+    {
+        $role = Role::find($id);
+
+        $role->delete();
+
+        return redirect()->route('roles.index')->with('success', 'Roles Deleted!');
+    }
 }

@@ -63,6 +63,8 @@
             {{ $slot }}
         </main>
     </div>
+
+    @stack('scriptjs')
 </body>
 
 </html>
