@@ -99,7 +99,7 @@
                                                     </td>
                                                     <td class="size-px whitespace-nowrap">
                                                         <div class="px-6 py-1.5 flex gap-2">
-                                                            <a href="{{ route('permissions.edit', $row->id) }}"
+                                                            <a href="{{ route('permissions.index') }}?edit={{ $row->id }}"
                                                                 class="inline-flex items-center text-sm font-medium text-blue-600 gap-x-1 decoration-2 hover:underline focus:outline-none focus:underline dark:text-blue-500"
                                                                 href="#">
                                                                 Edit
@@ -139,14 +139,24 @@
                     <div class="p-4 bg-white shadow rounded-xl sm:p-7 dark:bg-neutral-900">
                         <div class="mb-8 text-center">
                             <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
-                                Form Permission
+                                @if ($edit)
+                                    Edit Permission
+                                @else
+                                    Form Permission
+                                @endif
                             </h2>
                             <p class="text-sm text-gray-600 dark:text-neutral-400">
                                 Add & Edit Permission
                             </p>
                         </div>
 
+                        @if ($edit)
+                        <form method="post" action="{{ route('permissions.update', $edit->id) }}">
+                            @method('PUT')
+                        @else
                         <form method="post" action="{{ route('permissions.store') }}">
+                        @endif
+
                             @csrf
                             <!-- Section -->
                             <div
@@ -155,28 +165,36 @@
                                 <div class="mt-2 space-y-3">
                                     <input id="af-payment-payment-method" type="text"
                                         class="block w-full px-3 py-2 text-sm border-gray-200 rounded-lg shadow-sm pe-11 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                        placeholder="Name Permission" name="permission" required>
+                                        placeholder="Name Permission" name="permission" value="@if($edit){{ $edit->name }}@endif" required>
                                     @error('permission')
                                         <span class='text-red-400'>{{ $message }}</span>
                                     @enderror
                                     <select required name="roles[]" multiple
                                         class="w-full px-3 py-2 text-sm border-gray-200 rounded-lg shadow-sm lock pe-11 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 select-multiple">
                                         @foreach ($roles as $role)
-                                            <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                            <option value="{{ $role->name }}" {{ in_array($role->name, $permissionRoles) ? 'selected' : '' }}>{{ $role->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <!-- End Section -->
                             <div class="flex justify-end mt-5 gap-x-2">
-                                <button type="reset"
+                                <a href="{{ route('permissions.index') }}" <button type="button"
                                     class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-800 bg-white border border-gray-200 rounded-lg shadow-sm gap-x-2 hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
                                     Cancel
-                                </button>
-                                <button type="submit"
-                                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg gap-x-2 hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
-                                    Save changes
-                                </button>
+                                    </button>
+                                </a>
+                                @if ($edit)
+                                    <button type="submit"
+                                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-yellow-600 border border-transparent rounded-lg gap-x-2 hover:bg-yellow-700 focus:outline-none focus:bg-yellow-700 disabled:opacity-50 disabled:pointer-events-none">
+                                        Update
+                                    </button>
+                                @else
+                                    <button type="submit"
+                                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg gap-x-2 hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                                        Save
+                                    </button>
+                                @endif
                             </div>
                         </form>
                     </div>
