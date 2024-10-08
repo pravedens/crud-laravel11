@@ -100,6 +100,28 @@
                                 <!-- End Col -->
 
                                 <div class="sm:col-span-3">
+                                    <label for="af-account-email"
+                                        class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                        Roles
+                                    </label>
+                                </div>
+                                <!-- End Col -->
+
+                                <div class="sm:col-span-9">
+                                    <select name="roles[]" multiple"
+                                        class="block w-full px-3 py-2 text-sm border-gray-200 rounded-lg shadow-sm pe-11 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" required>
+                                        <option>Roles</option>
+                                        @foreach ($roles as $role)
+                                        <option value="{{ $role->name }}" {{ in_array($role->name, $dataRoles) ? 'selected' : '' }}>{{ $role->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('roles')
+                                        <span class="text-sm text-red-400">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <!-- End Col -->
+
+                                <div class="sm:col-span-3">
                                     <label for="af-account-password"
                                         class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                         Password
@@ -152,7 +174,6 @@
                     </div>
                     <!-- End Card -->
                 </div>
-                <!-- End Card Section -->
             </div>
         </div>
     </div>

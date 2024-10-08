@@ -75,6 +75,15 @@
                                                     <div class="flex items-center gap-x-2">
                                                         <span
                                                             class="text-xs font-semibold tracking-wide text-gray-800 uppercase dark:text-neutral-200">
+                                                            Role
+                                                        </span>
+                                                    </div>
+                                                </th>
+
+                                                <th scope="col" class="px-6 py-3 text-start">
+                                                    <div class="flex items-center gap-x-2">
+                                                        <span
+                                                            class="text-xs font-semibold tracking-wide text-gray-800 uppercase dark:text-neutral-200">
                                                             Email
                                                         </span>
                                                     </div>
@@ -113,6 +122,15 @@
                                                                         class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $row->name }}</span>
                                                                 </div>
                                                             </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="h-px w-72 whitespace-nowrap">
+                                                        <div class="px-6 py-3">
+                                                            <span
+                                                                class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">
+                                                                @foreach ($row->roles as $role)
+                                                                    {{ $role->name }}
+                                                                @endforeach</span>
                                                         </div>
                                                     </td>
                                                     <td class="h-px w-72 whitespace-nowrap">
