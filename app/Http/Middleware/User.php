@@ -21,14 +21,14 @@ class User
             return redirect()->route('login');
         }
 
-        $userRoles = Auth::user()->role;
-        if($userRoles == 2)
+        $userRoles = auth()->user()->roles->pluck('name');
+        if(in_array('Staf', $userRoles))
         {
             return $next($request);
         }
-        if($userRoles == 1)
+        else
         {
-            return redirect()->route('admin.dashboard');
+            return redirect()->back();
         }
     }
 }

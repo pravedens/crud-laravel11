@@ -14,7 +14,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified', 'user'])->name('user.dashboard');
+})->middleware(['auth', 'verified'])->name('user.dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -25,7 +25,7 @@ Route::middleware('auth')->group(function () {
 
 });
 
-Route::middleware(['auth', 'admin'])->group(function(){
+Route::middleware(['auth'])->group(function(){
     //Page User
     Route::resource('users', UserController::class);
     Route::resource('categories', CategoryController::class)->parameters(['categories' => 'category:slug']);
@@ -36,6 +36,6 @@ Route::middleware(['auth', 'admin'])->group(function(){
 
 Route::get('admin.dashboard', function () {
     return view('admin.dashboard');
-})->middleware(['auth', 'verified', 'admin'])->name('admin.dashboard');
+})->middleware(['auth', 'verified'])->name('admin.dashboard');
 
 require __DIR__.'/auth.php';
