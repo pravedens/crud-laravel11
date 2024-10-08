@@ -119,6 +119,8 @@
                             Foods
                         </x-nav-link>
 
+                    @role('Admin')
+
                     <li class='text-gray-400 text-[14px] ml-2'>Authorization</li>
                     <hr class='w-1/2 mt-1 ml-2 text-gray-100 opacity-30'>
 
@@ -139,6 +141,8 @@
                         </svg>
                         Permissions
                     </x-nav-link>
+
+                    @endrole
 
                     <li class='text-gray-400 text-[14px] ml-2'>Setting</li>
                     <hr class='w-1/2 mt-1 ml-2 text-gray-100 opacity-30'>
