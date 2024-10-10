@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\AuthApiController;
 use App\Http\Controllers\API\UserApiController;
 use App\Http\Controllers\API\CategoryApiController;
+use App\Http\Controllers\API\FoodApiController;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,5 +22,7 @@ Route::post('register', [AuthApiController::class, 'register']);
 Route::post('login', [AuthApiController::class, 'login']);
 
 Route::get('categories', [CategoryApiController::class, 'index']);
+
+Route::get('foods', [FoodApiController::class, 'index']);
 
 
