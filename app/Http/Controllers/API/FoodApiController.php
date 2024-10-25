@@ -12,8 +12,9 @@ class FoodApiController extends Controller
     public function index(Request $request)
     {
         $paginate = 15;
-        $foods = Food::when($request->search, function($query, $search) {
-            $query->where('name', 'like', '%'. $search .'%');
+        $foods = Food::when($request->category, function($query) use($request) {
+            //$query->where('name', 'like', '%'. $search .'%');
+            $query->where('category_id', $request->category);
         })->paginate($paginate);
 
         return $this->sendResponse(FoodResource::collection($foods)->resource, 'Successfully', 200);
